@@ -8,6 +8,12 @@ $config = [
     'basePath' => dirname(__DIR__),
     'vendorPath' => dirname(__DIR__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor',
     'bootstrap' => ['log'],
+    
+    'defaultRoute' => '/auth/login',
+    'homeUrl' => '/auth/login',
+    'language' => 'ru-RU',
+    'timeZone' => 'Europe/Moscow',
+    
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -23,6 +29,9 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
