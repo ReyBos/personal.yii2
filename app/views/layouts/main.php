@@ -62,6 +62,23 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+        
+        <?php 
+        $error = Yii::$app->session->getFlash('error');
+        if ($error) {
+            echo '<div class="alert alert-danger col-12" role="alert">';
+            echo $error;
+            echo '</div>';
+        }
+
+        $success = Yii::$app->session->getFlash('success');
+        if ($success) {
+            echo '<div class="alert-container col-12"><div class="alert alert-success" role="alert">';
+            echo $success;
+            echo '</div></div>';
+        }
+        ?>
+        
         <?= $content ?>
     </div>
 </div>

@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\models\SignupForm;
 use app\models\LoginForm;
 use app\controllers\MainController;
+use app\services\AuthService;
+use app\services\exceptions\AuthException;
 
 class AuthController extends MainController
 {
@@ -66,6 +68,17 @@ class AuthController extends MainController
         }
         
         $model = new SignupForm();
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            
+            try {
+                AuthService::saveNewUser($model);
+                
+                return $this->routeUser();
+                
+            } catch (AuthException $ex) {
+                \Yii::$app->getSession()->setFlash('error', $ex->getMessage());
+            }
+        }
     
         return $this->render('signup', compact('model'));
     }
