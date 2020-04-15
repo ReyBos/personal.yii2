@@ -19,6 +19,10 @@ class AuthService
         $user->password = \Yii::$app->security->generatePasswordHash($model->password);
         
         if($user->save()){
+            $auth = \Yii::$app->authManager;
+            $authorRole = $auth->getRole('user');
+            $auth->assign($authorRole, $user->getId());
+        
             return true;
             
         } else {

@@ -34,7 +34,7 @@ $config = [
             'class' => 'yii\rbac\DbManager',
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'error/index',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',

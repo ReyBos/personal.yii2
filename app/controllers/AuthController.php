@@ -16,6 +16,7 @@ class AuthController extends MainController
         $rules['access']['rules'] = [
             [
                 'actions' => [
+                    'login',
                     'logout',
                 ],
                 'allow' => true,
@@ -28,7 +29,7 @@ class AuthController extends MainController
                 ],
                 'allow' => true,
                 'roles' => ['?'],
-            ]
+            ],
         ];
         
         return $rules;
@@ -56,7 +57,7 @@ class AuthController extends MainController
     
     public function actionLogout()
     {
-        Yii::$app->user->logout();
+        \Yii::$app->user->logout();
 
         return $this->routeUser();
     }
@@ -72,6 +73,7 @@ class AuthController extends MainController
             
             try {
                 AuthService::saveNewUser($model);
+                \Yii::$app->getSession()->setFlash('success', 'Регистрация прошла успешно! Используйте свой логин и пароль для входа.');
                 
                 return $this->routeUser();
                 
@@ -85,7 +87,21 @@ class AuthController extends MainController
     
     protected function routeUser()
     {
-        
+        if (\Yii::$app->getUser()->getIdentity()) {
+            
+            if (\Yii::$app->user->can('moderator')) {
+                return 123;
+            }
+            
+            if (\Yii::$app->user->can('user')) {var_dump('here');
+                
+                return $this->redirect('/user-info/index');
+            }
+            
+        } else {
+            
+            return $this->redirect('/auth/login');
+        }
     }
 
 }
