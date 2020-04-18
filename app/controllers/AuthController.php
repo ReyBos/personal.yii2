@@ -10,6 +10,8 @@ use app\services\exceptions\AuthException;
 
 class AuthController extends MainController
 {
+    public $layout = 'auth';
+    
     public function behaviors()
     {
         $rules = parent::behaviors();
@@ -93,7 +95,7 @@ class AuthController extends MainController
                 return 123;
             }
             
-            if (\Yii::$app->user->can('user')) {var_dump('here');
+            if (\Yii::$app->user->can('user')) {
                 
                 return $this->redirect('/user-info/index');
             }
