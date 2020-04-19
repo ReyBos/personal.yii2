@@ -52,8 +52,11 @@ class AuthController extends MainController
 
         $model->password = '';
         
-        return $this->render('login', [
-            'model' => $model,
+        return $this->render('index', [
+            'loginForm' => $model,
+            'signupForm' => new SignupForm(),
+            //для определения какая вкладка активна на странице: логин/регистрация
+            'isLogin' => true,
         ]);
     }
     
@@ -84,7 +87,11 @@ class AuthController extends MainController
             }
         }
     
-        return $this->render('signup', compact('model'));
+        return $this->render('index', [
+            'loginForm' => new LoginForm(),
+            'signupForm' => $model,
+            'isLogin' => false,
+        ]);
     }
     
     protected function routeUser()
@@ -92,7 +99,7 @@ class AuthController extends MainController
         if (\Yii::$app->getUser()->getIdentity()) {
             
             if (\Yii::$app->user->can('moderator')) {
-                return 123;
+                return 'Админка';
             }
             
             if (\Yii::$app->user->can('user')) {

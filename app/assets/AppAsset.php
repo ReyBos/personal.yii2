@@ -19,7 +19,7 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@frontend';
-    public $css = [        
+    public $css = [
         'css/bootstrap-reboot.css',
         'css/bootstrap.css',
         'css/bootstrap-grid.css',
