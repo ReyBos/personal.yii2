@@ -36,6 +36,25 @@ $this->title = 'Добро пожаловать в Olympus';
 
             <!-- Tab panes -->
             <div class="tab-content">
+                
+                <?php
+    
+                $error = \Yii::$app->session->getFlash('error');
+                if ($error) {
+                    echo '<div class="alert alert-danger col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" role="alert">';
+                    echo $error;
+                    echo '</div>';
+                }
+
+                $success = \Yii::$app->session->getFlash('success');
+                if ($success) {
+                    echo '<div class="alert alert-success col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12" role="alert">';
+                    echo $success;
+                    echo '</div>';
+                }
+
+                ?>
+                
                 <div class="tab-pane <?= $isLogin ? 'active' : '' ?>" id="profile" role="tabpanel" data-mh="log-tab">
                     <div class="title h6">Войдите в свой аккаунт</div>
                     
@@ -69,7 +88,6 @@ $this->title = 'Добро пожаловать в Olympus';
                                  ]) ?>
                                 
                                 <?= Html::submitButton('Войти', ['class' => 'btn btn-lg btn-primary full-width', 'name' => 'login-button']) ?>
-                                
                             </div>
                         </div>
 
@@ -78,7 +96,25 @@ $this->title = 'Добро пожаловать в Olympus';
                 </div>
                 <div class="tab-pane <?= $isLogin ? '' : 'active' ?>" id="home" role="tabpanel" data-mh="log-tab">
                     <div class="title h6">Регистрация в Olympus</div>
-                    <form class="content">
+                    <?php $form = ActiveForm::begin([
+                        'action' => 'auth/signup',
+                        'id' => 'signup-form',
+                        'options' => [
+                            'class' => 'content',
+                        ],
+                        'fieldConfig' => [
+                            'template' => "{label}\n{input}\n{error}",
+                            'labelOptions' => [
+                                'class' => 'control-label'
+                             ],
+                            'options' => [
+                                'class' => 'form-group label-floating',
+                            ],
+                        ],
+                        'errorCssClass' => '',
+                        'successCssClass' => '',
+                    ]); ?>
+                    
                         <div class="row">
                             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group label-floating">
@@ -93,15 +129,6 @@ $this->title = 'Добро пожаловать в Olympus';
                                 </div>
                             </div>
                             <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Email</label>
-                                    <input class="form-control" placeholder="" type="email">
-                                </div>
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Пароль</label>
-                                    <input class="form-control" placeholder="" type="password">
-                                </div>
-
                                 <div class="form-group date-time-picker label-floating">
                                     <label class="control-label">Дата рождения</label>
                                     <input name="datetimepicker" value="10/24/1984" />
@@ -109,7 +136,6 @@ $this->title = 'Добро пожаловать в Olympus';
                                         <svg class="olymp-calendar-icon"><use xlink:href="/web/svg-icons/sprites/icons.svg#olymp-calendar-icon"></use></svg>
                                     </span>
                                 </div>
-
                                 <div class="form-group label-floating is-select">
                                     <label class="control-label">Пол</label>
                                     <select class="selectpicker form-control">
@@ -117,11 +143,17 @@ $this->title = 'Добро пожаловать в Olympus';
                                         <option value="FE">Женский</option>
                                     </select>
                                 </div>
+                                
+                                <?= $form->field($signupForm, 'username')->textInput() ?>
 
-                                <a href="#" class="btn btn-purple btn-lg full-width">Завершить регистрацию!</a>
+                                <?= $form->field($signupForm, 'password')->passwordInput() ?>
+                                
+                                <?= Html::submitButton('Завершить регистрацию!', ['class' => 'btn btn-purple btn-lg full-width', 'name' => 'login-button']) ?>
                             </div>
                         </div>
-                    </form>
+                    
+                    <?php ActiveForm::end(); ?>
+                    
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ use app\models\LoginForm;
 use app\controllers\MainController;
 use app\services\AuthService;
 use app\services\exceptions\AuthException;
+use app\models\UserInfo;
 
 class AuthController extends MainController
 {
@@ -34,6 +35,12 @@ class AuthController extends MainController
             ],
         ];
         
+        $rules['verbs']['actions'] = [
+            'logout' => ['post', 'get'],
+            'login' => ['post', 'get'],
+            'signup' => ['post'],
+        ];
+        
         return $rules;
     }
     
@@ -44,17 +51,18 @@ class AuthController extends MainController
             return $this->routeUser();
         }
 
-        $model = new LoginForm();
-        if ($model->load(\Yii::$app->request->post()) && $model->login()) {
+        $loginForm = new LoginForm();
+        if ($loginForm->load(\Yii::$app->request->post()) && $loginForm->login()) {
             
             return $this->routeUser();
         }
 
-        $model->password = '';
+        $loginForm->password = '';
         
         return $this->render('index', [
-            'loginForm' => $model,
+            'loginForm' => $loginForm,
             'signupForm' => new SignupForm(),
+            'userInfo' => new UserInfo(),
             //для определения какая вкладка активна на странице: логин/регистрация
             'isLogin' => true,
         ]);
@@ -73,23 +81,34 @@ class AuthController extends MainController
             return $this->routeUser();
         }
         
-        $model = new SignupForm();
-        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
-            
+        $signupForm = new SignupForm();
+        $userInfo = new UserInfo();
+        
+        if ($signupForm->load(\Yii::$app->request->post()) && 
+            $userInfo->load(\Yii::$app->request->post()) && 
+            $signupForm->validate() &&
+            $userInfo->validate()
+        ) {
+            $transaction = \Yii::$app->db->beginTransaction();
             try {
-                AuthService::saveNewUser($model);
+                AuthService::saveNewUser($signupForm, $userInfo);
+                $transaction->commit();
                 \Yii::$app->getSession()->setFlash('success', 'Регистрация прошла успешно! Используйте свой логин и пароль для входа.');
                 
                 return $this->routeUser();
                 
             } catch (AuthException $ex) {
+                $transaction->rollBack();
                 \Yii::$app->getSession()->setFlash('error', $ex->getMessage());
             }
         }
-    
+                
+        $signupForm->password = '';
+        
         return $this->render('index', [
             'loginForm' => new LoginForm(),
-            'signupForm' => $model,
+            'signupForm' => $signupForm,
+            'userInfo' => $userInfo,
             'isLogin' => false,
         ]);
     }

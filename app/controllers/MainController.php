@@ -22,9 +22,7 @@ class MainController extends Controller
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post', 'get'],
-                ],
+                'actions' => [],
             ],
         ];
     }
