@@ -37,8 +37,6 @@ class AuthController extends MainController
         
         $rules['verbs']['actions'] = [
             'logout' => ['post', 'get'],
-            'login' => ['post', 'get'],
-            'signup' => ['post'],
         ];
         
         return $rules;
@@ -89,13 +87,14 @@ class AuthController extends MainController
             $signupForm->validate() &&
             $userInfo->validate()
         ) {
+            
             $transaction = \Yii::$app->db->beginTransaction();
             try {
                 AuthService::saveNewUser($signupForm, $userInfo);
                 $transaction->commit();
                 \Yii::$app->getSession()->setFlash('success', 'Регистрация прошла успешно! Используйте свой логин и пароль для входа.');
                 
-                return $this->routeUser();
+                return $this->actionLogin();
                 
             } catch (AuthException $ex) {
                 $transaction->rollBack();

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\date\DatePicker;
 
 $this->title = 'Добро пожаловать в Olympus';
 
@@ -59,6 +60,7 @@ $this->title = 'Добро пожаловать в Olympus';
                     <div class="title h6">Войдите в свой аккаунт</div>
                     
                     <?php $form = ActiveForm::begin([
+                        'action' => '/auth/login',
                         'id' => 'login-form',
                         'options' => [
                             'class' => 'content',
@@ -97,7 +99,7 @@ $this->title = 'Добро пожаловать в Olympus';
                 <div class="tab-pane <?= $isLogin ? '' : 'active' ?>" id="home" role="tabpanel" data-mh="log-tab">
                     <div class="title h6">Регистрация в Olympus</div>
                     <?php $form = ActiveForm::begin([
-                        'action' => 'auth/signup',
+                        'action' => '/auth/signup',
                         'id' => 'signup-form',
                         'options' => [
                             'class' => 'content',
@@ -117,32 +119,20 @@ $this->title = 'Добро пожаловать в Olympus';
                     
                         <div class="row">
                             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Имя</label>
-                                    <input class="form-control" placeholder="" type="text">
-                                </div>
+                                <?= $form->field($userInfo, 'first_name')->textInput() ?>
                             </div>
                             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Фамилия</label>
-                                    <input class="form-control" placeholder="" type="text">
-                                </div>
+                                <?= $form->field($userInfo, 'last_name')->textInput() ?>
                             </div>
                             <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group date-time-picker label-floating">
-                                    <label class="control-label">Дата рождения</label>
-                                    <input name="datetimepicker" value="10/24/1984" />
-                                    <span class="input-group-addon">
-                                        <svg class="olymp-calendar-icon"><use xlink:href="/web/svg-icons/sprites/icons.svg#olymp-calendar-icon"></use></svg>
-                                    </span>
-                                </div>
-                                <div class="form-group label-floating is-select">
-                                    <label class="control-label">Пол</label>
-                                    <select class="selectpicker form-control">
-                                        <option value="MA">Мужской</option>
-                                        <option value="FE">Женский</option>
-                                    </select>
-                                </div>
+                                
+                                <?= $form->field($userInfo, 'birthday_site')->widget(DatePicker::classname(), [
+                                    'pluginOptions' => [
+                                        'autoclose'=>true
+                                    ]
+                                ]); ?>
+                                
+                                <?= $form->field($userInfo, 'gender')->dropDownList($userInfo->getGenderList(), ['class' => 'selectpicker form-control']) ?>
                                 
                                 <?= $form->field($signupForm, 'username')->textInput() ?>
 

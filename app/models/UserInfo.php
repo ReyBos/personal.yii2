@@ -18,6 +18,11 @@ namespace app\models;
  */
 class UserInfo extends \yii\db\ActiveRecord
 {
+    const GENDER_MALE = 'male';
+    const GENDER_FEMALE = 'female';
+    
+    public $birthday_site;
+    
     public static function tableName()
     {
         return 'user_info';
@@ -26,9 +31,10 @@ class UserInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'first_name', 'last_name', 'birthday', 'gender'], 'required'],
+            [['first_name', 'last_name', 'birthday_site', 'gender'], 'required'],
             [['user_id'], 'integer'],
             [['birthday', 'registration_date'], 'safe'],
+            [['birthday_site'], 'date', 'format' => 'php:d.m.Y'],
             [['gender', 'is_active'], 'string'],
             [['first_name', 'last_name'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -42,7 +48,7 @@ class UserInfo extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'first_name' => 'Имя',
             'last_name' => 'Фамилия',
-            'birthday' => 'День рождения',
+            'birthday_site' => 'Дата рождения',
             'gender' => 'Пол',
             'registration_date' => 'Дата регистрации',
             'is_active' => 'Статус',
@@ -52,5 +58,18 @@ class UserInfo extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+    
+    public function getGenderList() 
+    {
+        return [
+            self::GENDER_MALE => 'Мужской',
+            self::GENDER_FEMALE => 'Женский',
+        ];
+    }
+    
+    public function getBirthday_site()
+    {
+        return $this->birthday ? date('d.m.Y', strtotime($this->birthday)) : '';
     }
 }

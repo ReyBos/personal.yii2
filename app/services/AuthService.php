@@ -8,17 +8,25 @@ use app\services\exceptions\AuthException;
 class AuthService 
 {
     /**
-     * @param SignupForm $model
+     * @param SignupForm $signupForm
+     * @param UserInfo $userInfo
      * @return bool если пользователь сохранен успешно
      * @throws AuthException при ошибке сохранения пользователя
      */
-    public function saveNewUser($model)
+    public function saveNewUser($signupForm, $userInfo)
     {
         $user = new User();
-        $user->username = $model->username;
-        $user->password = \Yii::$app->security->generatePasswordHash($model->password);
+        $user->username = $signupForm->username;
+        $user->password = \Yii::$app->security->generatePasswordHash($signupForm->password);
         
         if ($user->save()) {
+            
+            $userInfo->user_id = $user->id;
+            $userInfo->birthday = date('Y-m-d', strtotime($userInfo->birthday_site));
+            if (!$userInfo->save()) {
+                throw new AuthException('При регистрации пользователя на сервере произошла ошибка, приносим извинения!');
+            }
+            
             $auth = \Yii::$app->authManager;
             $authorRole = $auth->getRole('user');
             $auth->assign($authorRole, $user->getId());
