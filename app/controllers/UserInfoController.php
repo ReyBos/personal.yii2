@@ -13,6 +13,7 @@ class UserInfoController extends MainController
             [
                 'actions' => [
                     'index',
+                    'template',
                 ],
                 'allow' => true,
                 'roles' => ['@'],
@@ -24,6 +25,13 @@ class UserInfoController extends MainController
     
     public function actionIndex()
     {
+        return $this->render('index');
+    }
+    
+    public function actionTemplate()
+    {
+        $this->layout = 'main-template';
+        
         return $this->render('index');
     }
 }

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 use kartik\date\DatePicker;
 
 $this->title = 'Добро пожаловать в Olympus';
@@ -25,12 +26,12 @@ $this->title = 'Добро пожаловать в Olympus';
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link <?= $isLogin ? 'active' : '' ?>" data-toggle="tab" href="#profile" role="tab">
-                        <svg class="olymp-register-icon"><use xlink:href="/web/svg-icons/sprites/icons.svg#olymp-register-icon"></use></svg>
+                        <svg class="olymp-register-icon"><use xlink:href="<?= Url::to('@frontend/svg-icons/sprites/icons.svg#olymp-register-icon') ?>"></use></svg>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $isLogin ? '' : 'active' ?>" data-toggle="tab" href="#home" role="tab">
-                        <svg class="olymp-login-icon"><use xlink:href="/web/svg-icons/sprites/icons.svg#olymp-login-icon"></use></svg>
+                        <svg class="olymp-login-icon"><use xlink:href="<?= Url::to('@frontend/svg-icons/sprites/icons.svg#olymp-login-icon') ?>"></use></svg>
                     </a>
                 </li>
             </ul>
