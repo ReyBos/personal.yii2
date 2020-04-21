@@ -30,7 +30,7 @@ DeferAppAsset::register($this);
             });
         </script>
     </head>
-    <body class="landing-page">
+    <body class="body-bg-white">
         <?php $this->beginBody() ?>
 
         <!-- Preloader -->
@@ -53,41 +53,17 @@ DeferAppAsset::register($this);
                 </circle>
                 </g>
                 </svg>
+
                 <div class="text">Loading ...</div>
             </div>
         </div>
         <!-- ... end Preloader -->
-        <div class="content-bg-wrap"></div>
-
-        <!-- Header Standard Landing  -->
-        <div class="header--standard header--standard-landing" id="header--standard">
+        
+        <section class="page-500-content medium-padding120">
             <div class="container">
-                <div class="header--standard-wrap">
-
-                    <a href="#" class="logo">
-                        <div class="img-wrap">
-                            <?= Html::img("@frontend/img/auth/logo.png", ['alt' => 'Olympus']); ?>
-                            <?= Html::img("@frontend/img/auth/logo-colored-small.png", ['alt' => 'Olympus', 'class' => 'logo-colored']); ?>
-                        </div>
-                        <div class="title-block">
-                            <h6 class="logo-title">olympus</h6>
-                            <div class="sub-title">SOCIAL NETWORK</div>
-                        </div>
-                    </a>
-
-                    <a href="#" class="open-responsive-menu js-open-responsive-menu">
-                        <svg class="olymp-menu-icon"><use xlink:href="/web/svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
-                    </a>
-                </div>
+                <?= $content ?>
             </div>
-        </div>
-        <!-- ... end Header Standard Landing  -->
-        <div class="header-spacer--standard"></div>
-
-        <div class="container">
-            <?= $content ?>
-        </div>
-
+        </section>
         <?php $this->endBody() ?>
     </body>
 </html>
