@@ -232,7 +232,6 @@ DeferAppAsset::register($this);
         <!-- ... end Fixed Sidebar Left -->
         
         <!-- Fixed Sidebar Left -->
-
         <div class="fixed-sidebar fixed-sidebar-responsive">
 
             <div class="fixed-sidebar-left sidebar--small" id="sidebar-left-responsive">
@@ -404,7 +403,6 @@ DeferAppAsset::register($this);
         <!-- ... end Fixed Sidebar Left -->
         
         <!-- Fixed Sidebar Right -->
-
         <div class="fixed-sidebar right">
             <div class="fixed-sidebar-right sidebar--small" id="sidebar-right">
 
@@ -896,12 +894,9 @@ DeferAppAsset::register($this);
 
             </div>
         </div>
-
         <!-- ... end Fixed Sidebar Right -->
 
-
         <!-- Fixed Sidebar Right-Responsive -->
-
         <div class="fixed-sidebar right fixed-sidebar-responsive" id="sidebar-right-responsive">
 
             <div class="fixed-sidebar-right sidebar--small">
@@ -1310,11 +1305,9 @@ DeferAppAsset::register($this);
             </div>
 
         </div>
-
         <!-- ... end Fixed Sidebar Right-Responsive -->
 
         <!-- Header-BP -->
-
         <header class="header" id="site-header">
 
             <div class="page-title">
@@ -1783,12 +1776,9 @@ DeferAppAsset::register($this);
             </div>
 
         </header>
-
         <!-- ... end Header-BP -->
 
-
         <!-- Responsive Header-BP -->
-
         <header class="header header-responsive" id="site-header-responsive">
 
             <div class="header-content-wrapper">
@@ -2159,12 +2149,10 @@ DeferAppAsset::register($this);
             <!-- ... end  Tab panes -->
 
         </header>
-
         <!-- ... end Responsive Header-BP -->
         <div class="header-spacer"></div>
         
         <!-- Top Header-Profile -->
-
         <div class="container">
             <div class="row">
                 <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -2253,13 +2241,12 @@ DeferAppAsset::register($this);
                 </div>
             </div>
         </div>
-
         <!-- ... end Top Header-Profile -->
+
         <div class="container">
             <div class="row">
 
                 <!-- Main Content -->
-
                 <div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
                     <div id="newsfeed-items-grid">
 
@@ -3033,14 +3020,10 @@ DeferAppAsset::register($this);
                         </svg>
                     </a>
                 </div>
-
                 <!-- ... end Main Content -->
 
-
                 <!-- Left Sidebar -->
-
                 <div class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
-
                     <div class="ui-block">
                         <div class="ui-block-title">
                             <h6 class="title">Profile Intro</h6>
@@ -3443,14 +3426,10 @@ DeferAppAsset::register($this);
                     </div>
 
                 </div>
-
                 <!-- ... end Left Sidebar -->
 
-
                 <!-- Right Sidebar -->
-
                 <div class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
-
                     <div class="ui-block">
                         <div class="ui-block-title">
                             <h6 class="title">Last Photos</h6>
@@ -3939,14 +3918,12 @@ DeferAppAsset::register($this);
                     </div>
 
                 </div>
-
                 <!-- ... end Right Sidebar -->
 
             </div>
         </div>
 
         <!-- Window-popup Update Header Photo -->
-
         <div class="modal fade" id="update-header-photo" tabindex="-1" role="dialog" aria-labelledby="update-header-photo" aria-hidden="true">
             <div class="modal-dialog window-popup update-header-photo" role="document">
                 <div class="modal-content">
@@ -3977,12 +3954,9 @@ DeferAppAsset::register($this);
                 </div>
             </div>
         </div>
-
-
         <!-- ... end Window-popup Update Header Photo -->
 
         <!-- Window-popup Choose from my Photo -->
-
         <div class="modal fade" id="choose-from-my-photo" tabindex="-1" role="dialog" aria-labelledby="choose-from-my-photo" aria-hidden="true">
             <div class="modal-dialog window-popup choose-from-my-photo" role="document">
 
@@ -4161,13 +4135,10 @@ DeferAppAsset::register($this);
 
             </div>
         </div>
-
         <!-- ... end Window-popup Choose from my Photo -->
 
         <!-- Playlist Popup -->
-
         <div class="window-popup playlist-popup" tabindex="-1" role="dialog" aria-labelledby="playlist-popup" aria-hidden="true">
-
             <a href="" class="icon-close js-close-popup">
                 <svg class="olymp-close-icon"><use xlink:href="<?= Url::to('@frontend/svg-icons/sprites/icons.svg#olymp-close-icon') ?>"></use></svg>
             </a>
@@ -4454,16 +4425,13 @@ DeferAppAsset::register($this);
             </audio>
 
         </div>
-
         <!-- ... end Playlist Popup -->
-
 
         <a class="back-to-top" href="#">
             <?= Html::img(Url::to('@frontend/svg-icons/back-to-top.svg'), ['alt' => 'arrow', 'class' => 'back-icon']) ?>
         </a>
         
         <!-- Window-popup-CHAT for responsive min-width: 768px -->
-
         <div class="ui-block popup-chat popup-chat-responsive" tabindex="-1" role="dialog" aria-labelledby="popup-chat-responsive" aria-hidden="true">
 
             <div class="modal-content">
@@ -4669,7 +4637,6 @@ DeferAppAsset::register($this);
             </div>
 
         </div>
-
         <!-- ... end Window-popup-CHAT for responsive min-width: 768px -->
         
         <?php $this->endBody() ?>

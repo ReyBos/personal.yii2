@@ -53,7 +53,7 @@ DeferAppAsset::register($this);
                 </circle>
                 </g>
                 </svg>
-                <div class="text">Loading ...</div>
+                <div class="text">Загрузка ...</div>
             </div>
         </div>
         <!-- ... end Preloader -->
