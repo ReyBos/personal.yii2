@@ -31,7 +31,7 @@ class m200419_163229_create_user_info_table extends Migration
             'user_info', 
             'user_id', 
             'user', 
-            'id',
+            'id'
         );
     }
 
